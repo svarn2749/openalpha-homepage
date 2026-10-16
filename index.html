@@ -14,8 +14,37 @@
 <body>
   <main>
     <h1>OpenAlpha</h1>
-    <p class="tagline">Accessible alpha in an AI-driven world<span class="cursor">_</span></p>
+    <p class="tagline"><span id="typed">Accessible alpha in an AI-driven world</span><span class="cursor" aria-hidden="true">_</span></p>
     <p class="status"><span class="dot"></span>Coming soon</p>
   </main>
+
+  <script>
+    // Type the tagline out one character at a time, terminal-style.
+    (function () {
+      var el = document.getElementById('typed');
+      var line = el.parentNode;
+      var cursor = line.querySelector('.cursor');
+      var text = el.textContent;
+      var i = 0;
+
+      line.setAttribute('aria-label', text);
+      el.setAttribute('aria-hidden', 'true');
+      // Reserve the full width so the centred line doesn't shift as it types.
+      line.style.width = (text.length + 1) + 'ch';
+      line.classList.add('typing');
+      el.textContent = '';
+
+      // Blink for a moment, then type; the cursor holds solid while typing.
+      setTimeout(function tick() {
+        cursor.classList.add('solid');
+        el.textContent = text.slice(0, ++i);
+        if (i < text.length) {
+          setTimeout(tick, 40 + Math.random() * 80);
+        } else {
+          cursor.classList.remove('solid');
+        }
+      }, 1200);
+    })();
+  </script>
 </body>
 </html>

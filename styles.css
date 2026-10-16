@@ -37,8 +37,12 @@ h1 {
 p { margin: 0; }
 a { color: inherit; }
 
-.tagline { color: var(--muted); font-size: clamp(0.85rem, 2.5vw, 1rem); }
+/* keep the tagline on one line: the ~40 mono characters are ~24em wide, so scale to the screen */
+.tagline { color: var(--muted); font-size: clamp(0.6rem, calc((100vw - 56px) / 24), 1rem); white-space: nowrap; }
+.tagline.typing { max-width: 100%; margin-inline: auto; text-align: left; }
 .cursor { color: var(--accent); animation: blink 1s steps(1) infinite; }
+/* the cursor holds solid while typing, then blinks once the line is done */
+.cursor.solid { animation: none; }
 
 .status {
   display: inline-flex;
@@ -68,8 +72,4 @@ a { color: inherit; }
 @keyframes ping {
   0%   { box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.7); }
   100% { box-shadow: 0 0 0 10px rgba(94, 234, 212, 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  h1, .cursor, .dot { animation: none; }
 }
