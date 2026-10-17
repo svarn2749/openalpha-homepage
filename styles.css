@@ -17,13 +17,26 @@ body {
   color: var(--text);
   font: 16px/1.6 var(--mono);
   text-align: center;
-  /* faint grid with a soft glow behind the title */
+  /* soft glow behind the title */
   background:
     radial-gradient(circle at 50% 45%, rgba(94, 234, 212, 0.10), transparent 45%),
-    linear-gradient(rgba(94, 234, 212, 0.05) 1px, transparent 1px) 0 0 / 40px 40px,
-    linear-gradient(90deg, rgba(94, 234, 212, 0.05) 1px, transparent 1px) 0 0 / 40px 40px,
     var(--bg);
 }
+
+/* grid that is clearest in the middle and fades out towards the corners */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(94, 234, 212, 0.16) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, rgba(94, 234, 212, 0.16) 1px, transparent 1px) 0 0 / 40px 40px;
+  -webkit-mask-image: radial-gradient(circle at 50% 45%, #000 0, transparent 65vmax);
+  mask-image: radial-gradient(circle at 50% 45%, #000 0, transparent 65vmax);
+}
+
+main { position: relative; }
 
 h1 {
   margin: 0 0 16px;
